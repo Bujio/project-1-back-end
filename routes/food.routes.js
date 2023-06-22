@@ -1,58 +1,58 @@
 const router = require("express").Router();
-const Foot = require("../models/Foot.model");
+const Food = require("../models/Food.model");
 
 //POST CREATE
 
 router.post("/", async (req, res, next) => {
   try {
-    const foot = await Foot.create(req.body);
-    return res.status(201).json(foot);
+    const food = await Food.create(req.body);
+    return res.status(201).json(food);
   } catch (err) {
     next(err);
   }
 });
 
-//GET LIST
+//GET FOOD LIST
 router.get("/", async (req, res, next) => {
   try {
-    const footList = await Foot.find();
-    return res.status(200).json(footList);
+    const foodList = await Food.find();
+    return res.status(200).json(foodList);
   } catch (err) {
     next(err);
   }
 });
 
-//GET FOOT ID
+//GET FOOD ID
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const footId = await Foot.findById(id);
-    return res.status(200).json(footId);
+    const foodId = await Food.findById(id);
+    return res.status(200).json(foodId);
   } catch (err) {
     next(err);
   }
 });
 
-//PUT FOOT UPDATE
+//PUT FOOD UPDATE
 
 router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const footUpdate = await Foot.findByIdAndUpdate(id, req.body, {
+    const foodUpdate = await Food.findByIdAndUpdate(id, req.body, {
       new: true,
     });
-    return res.status(200).json(footUpdate);
+    return res.status(200).json(foodUpdate);
   } catch (err) {
     next(err);
   }
 });
 
-//DELETE FOOT
+//DELETE FOOD
 
 router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    await Foot.findOneAndDelete(id);
+    await Food.findOneAndDelete(id);
     return res.status(200).json({ message: "borrado correctamente" });
   } catch (err) {
     next(err);
